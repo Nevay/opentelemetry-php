@@ -154,6 +154,11 @@ final class ProtobufSerializer
         for ($i = 0, $n = $desc->getFieldCount(); $i < $n; $i++) {
             // @phan-suppress-next-line PhanParamTooManyInternal
             $field = $desc->getField($i);
+            $type = $field->getType();
+            if ($type !== GPBType::MESSAGE && $type !== GPBType::ENUM) {
+                continue;
+            }
+
             $name = lcfirst(strtr(ucwords($field->getName(), '_'), ['_' => '']));
             if (!property_exists($data, $name)) {
                 continue;
