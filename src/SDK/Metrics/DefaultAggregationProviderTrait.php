@@ -17,6 +17,7 @@ trait DefaultAggregationProviderTrait
                 return new Aggregation\SumAggregation();
             case InstrumentType::HISTOGRAM:
                 return new Aggregation\ExplicitBucketHistogramAggregation($advisory['ExplicitBucketBoundaries'] ?? [0, 5, 10, 25, 50, 75, 100, 250, 500, 1000]);
+            case InstrumentType::GAUGE:
             case InstrumentType::ASYNCHRONOUS_GAUGE:
                 return new Aggregation\LastValueAggregation();
         }

@@ -66,6 +66,26 @@ interface MeterInterface
     ): HistogramInterface;
 
     /**
+     * Creates a `Gauge`.
+     *
+     * @param string $name name of the instrument
+     * @param string|null $unit unit of measure
+     * @param string|null $description description of the instrument
+     * @param array $advisory an optional set of recommendation
+     * @return GaugeInterface created instrument
+     *
+     * @see https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/metrics/api.md#gauge-creation
+     *
+     * @experimental
+     */
+    public function createGauge(
+        string $name,
+        ?string $unit = null,
+        ?string $description = null,
+        array $advisory = []
+    ): GaugeInterface;
+
+    /**
      * Creates an `ObservableGauge`.
      *
      * @param string $name name of the instrument

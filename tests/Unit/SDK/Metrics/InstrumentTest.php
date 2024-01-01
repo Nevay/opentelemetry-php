@@ -8,10 +8,12 @@ use OpenTelemetry\API\Metrics\ObserverInterface;
 use OpenTelemetry\SDK\Common\Attribute\Attributes;
 use OpenTelemetry\SDK\Common\Util\WeakMap;
 use OpenTelemetry\SDK\Metrics\Aggregation\ExplicitBucketHistogramAggregation;
+use OpenTelemetry\SDK\Metrics\Aggregation\LastValueAggregation;
 use OpenTelemetry\SDK\Metrics\Aggregation\SumAggregation;
 use OpenTelemetry\SDK\Metrics\Counter;
 use OpenTelemetry\SDK\Metrics\Data;
 use OpenTelemetry\SDK\Metrics\Data\Temporality;
+use OpenTelemetry\SDK\Metrics\Gauge;
 use OpenTelemetry\SDK\Metrics\Histogram;
 use OpenTelemetry\SDK\Metrics\Instrument;
 use OpenTelemetry\SDK\Metrics\InstrumentType;
@@ -196,6 +198,35 @@ final class InstrumentTest extends TestCase
                 ),
             ],
             Temporality::DELTA,
+        ), $s->collect($r));
+    }
+
+    /**
+     * @covers \OpenTelemetry\SDK\Metrics\Gauge
+     */
+    public function test_gauge(): void
+    {
+        $a = new MetricAggregator(null, new LastValueAggregation());
+        $s = new SynchronousMetricStream(new LastValueAggregation(), 0);
+        $w = new MetricRegistry(null, Attributes::factory(), new TestClock(1));
+        $i = new Instrument(InstrumentType::GAUGE, 'test', null, null);
+        $n = $w->registerSynchronousStream($i, $s, $a);
+        $r = $s->register(Temporality::DELTA);
+
+        $h = new Gauge($w, $i, new NoopStalenessHandler());
+        $h->record(1);
+        $h->record(7);
+
+        $w->collectAndPush([$n]);
+        $this->assertEquals(new Data\Gauge(
+            [
+                new Data\NumberDataPoint(
+                    7,
+                    Attributes::create([]),
+                    0,
+                    1,
+                ),
+            ],
         ), $s->collect($r));
     }
 
