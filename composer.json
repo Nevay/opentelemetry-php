@@ -8,20 +8,67 @@
     "license": "Apache-2.0",
     "require": {
         "php": "^8.1",
-        "google/protobuf": "^3.22",
-        "php-http/discovery": "^1.14",
-        "psr/http-client-implementation": "^1.0",
-        "psr/http-factory-implementation": "^1.0",
-        "psr/http-client": "^1.0",
-        "psr/http-message": "^1.0.1|^2.0",
-        "psr/log": "^1.1|^2.0|^3.0",
-        "symfony/polyfill-mbstring": "^1.23",
-        "symfony/polyfill-php82": "^1.26"
+        "open-telemetry/api": "@dev",
+        "open-telemetry/context": "@dev",
+        "open-telemetry/exporter-otlp": "@dev",
+        "open-telemetry/exporter-zipkin": "@dev",
+        "open-telemetry/gen-otlp-protobuf": "@dev",
+        "open-telemetry/extension-propagator-b3": "@dev",
+        "open-telemetry/extension-propagator-cloudtrace": "@dev",
+        "open-telemetry/extension-propagator-jaeger": "@dev",
+        "open-telemetry/sdk": "@dev",
+        "open-telemetry/sem-conv": "@dev",
+        "open-telemetry/transport-grpc": "@dev"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "proto/otel"
+        },
+        {
+            "type": "path",
+            "url": "src/Context"
+        },
+        {
+            "type": "path",
+            "url": "src/SemConv"
+        },
+        {
+            "type": "path",
+            "url": "src/API"
+        },
+        {
+            "type": "path",
+            "url": "src/SDK"
+        },
+        {
+            "type": "path",
+            "url": "src/Contrib/Otlp"
+        },
+        {
+            "type": "path",
+            "url": "src/Contrib/Grpc"
+        },
+        {
+            "type": "path",
+            "url": "src/Contrib/Zipkin"
+        },
+        {
+            "type": "path",
+            "url": "src/Extension/Propagator/B3"
+        },
+        {
+            "type": "path",
+            "url": "src/Extension/Propagator/CloudTrace"
+        },
+        {
+            "type": "path",
+            "url": "src/Extension/Propagator/Jaeger"
+        }
+    ],
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "composer/package-versions-deprecated": true,
             "php-http/discovery": true,
             "symfony/runtime": true
         }
@@ -32,37 +79,10 @@
             "homepage": "https://github.com/open-telemetry/opentelemetry-php/graphs/contributors"
         }
     ],
-    "replace": {
-        "open-telemetry/api": "self.version",
-        "open-telemetry/context": "self.version",
-        "open-telemetry/gen-otlp-protobuf": "self.version",
-        "open-telemetry/sdk": "self.version",
-        "open-telemetry/sdk-contrib": "self.version",
-        "open-telemetry/sem-conv": "self.version"
-    },
     "autoload": {
         "psr-4": {
-            "OpenTelemetry\\": "src/",
-            "Opentelemetry\\Proto\\": "proto/otel/Opentelemetry/Proto/",
-            "GPBMetadata\\Opentelemetry\\": "proto/otel/GPBMetadata/Opentelemetry/"
-        },
-        "files": [
-            "src/Context/fiber/initialize_fiber_handler.php",
-            "src/API/Trace/functions.php",
-            "src/Contrib/Otlp/_register.php",
-            "src/Contrib/Grpc/_register.php",
-            "src/Contrib/Zipkin/_register.php",
-            "src/Extension/Propagator/B3/_register.php",
-            "src/Extension/Propagator/CloudTrace/_register.php",
-            "src/Extension/Propagator/Jaeger/_register.php",
-            "src/SDK/Logs/Exporter/_register.php",
-            "src/SDK/Metrics/MetricExporter/_register.php",
-            "src/SDK/Propagation/_register.php",
-            "src/SDK/Trace/SpanExporter/_register.php",
-            "src/SDK/Common/Dev/Compatibility/_load.php",
-            "src/SDK/Common/Util/functions.php",
-            "src/SDK/_autoload.php"
-        ]
+            "OpenTelemetry\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -103,10 +123,5 @@
         "rector/rector": "^1",
         "symfony/http-client": "^5.2",
         "symfony/yaml": "^6 || ^5"
-    },
-    "suggest": {
-        "ext-gmp": "To support unlimited number of synchronous metric readers",
-        "ext-grpc": "To use the OTLP GRPC Exporter",
-        "ext-protobuf": "For more performant protobuf/grpc exporting"
     }
 }
