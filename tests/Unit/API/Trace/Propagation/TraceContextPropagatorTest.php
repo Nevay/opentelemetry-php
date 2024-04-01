@@ -289,6 +289,29 @@ class TraceContextPropagatorTest extends TestCase
         );
     }
 
+    public function test_extract_random_flag(): void
+    {
+        $carrier = [
+            TraceContextPropagator::TRACEPARENT => '00-12345678901234567890123456789012-1234567890123456-02',
+        ];
+
+        $spanContext = $this->getSpanContext($this->traceContextPropagator->extract($carrier));
+        $this->assertSame('12345678901234567890123456789012', $spanContext->getTraceId());
+        $this->assertSame('1234567890123456', $spanContext->getSpanId());
+        $this->assertSame(0x2, $spanContext->getTraceFlags() & 0x2);
+    }
+
+    public function test_inject_random_flag(): void
+    {
+        $context = $this->withSpanContext(SpanContext::create('12345678901234567890123456789012', '1234567890123456', 0x2), Context::getCurrent());
+
+        $carrier = [];
+        $this->traceContextPropagator->inject($carrier, context: $context);
+
+        $this->assertArrayHasKey(TraceContextPropagator::TRACEPARENT, $carrier);
+        $this->assertSame('00-12345678901234567890123456789012-1234567890123456-02', $carrier[TraceContextPropagator::TRACEPARENT]);
+    }
+
     public function test_invalid_traceparent_version_0xff(): void
     {
         $this->assertInvalid([
