@@ -43,7 +43,7 @@ class Mapping extends \Google\Protobuf\Internal\Message
      */
     protected $filename_strindex = 0;
     /**
-     * References to attributes in Profile.attribute_table. [optional]
+     * References to attributes in ProfilesDictionary.attribute_table. [optional]
      *
      * Generated from protobuf field <code>repeated int32 attribute_indices = 5;</code>
      */
@@ -84,7 +84,7 @@ class Mapping extends \Google\Protobuf\Internal\Message
      *           disk for the main binary and shared libraries, or virtual
      *           abstractions like "[vdso]".
      *     @type int[]|\Google\Protobuf\Internal\RepeatedField $attribute_indices
-     *           References to attributes in Profile.attribute_table. [optional]
+     *           References to attributes in ProfilesDictionary.attribute_table. [optional]
      *     @type bool $has_functions
      *           The following fields indicate the resolution of symbolic info.
      *     @type bool $has_filenames
@@ -206,7 +206,7 @@ class Mapping extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * References to attributes in Profile.attribute_table. [optional]
+     * References to attributes in ProfilesDictionary.attribute_table. [optional]
      *
      * Generated from protobuf field <code>repeated int32 attribute_indices = 5;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -217,7 +217,7 @@ class Mapping extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * References to attributes in Profile.attribute_table. [optional]
+     * References to attributes in ProfilesDictionary.attribute_table. [optional]
      *
      * Generated from protobuf field <code>repeated int32 attribute_indices = 5;</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var

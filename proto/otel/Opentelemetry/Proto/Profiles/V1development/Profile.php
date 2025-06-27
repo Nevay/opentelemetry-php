@@ -40,80 +40,34 @@ class Profile extends \Google\Protobuf\Internal\Message
      */
     private $sample;
     /**
-     * Mapping from address ranges to the image/binary/library mapped
-     * into that address range.  mapping[0] will be the main binary.
-     * If multiple binaries contribute to the Profile and no main
-     * binary can be identified, mapping[0] has no special meaning.
+     * References to locations in ProfilesDictionary.location_table.
      *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Mapping mapping_table = 3;</code>
-     */
-    private $mapping_table;
-    /**
-     * Locations referenced by samples via location_indices.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Location location_table = 4;</code>
-     */
-    private $location_table;
-    /**
-     * Array of locations referenced by samples.
-     *
-     * Generated from protobuf field <code>repeated int32 location_indices = 5;</code>
+     * Generated from protobuf field <code>repeated int32 location_indices = 3;</code>
      */
     private $location_indices;
     /**
-     * Functions referenced by locations.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Function function_table = 6;</code>
-     */
-    private $function_table;
-    /**
-     * Lookup table for attributes.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.common.v1.KeyValue attribute_table = 7;</code>
-     */
-    private $attribute_table;
-    /**
-     * Represents a mapping between Attribute Keys and Units.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.AttributeUnit attribute_units = 8;</code>
-     */
-    private $attribute_units;
-    /**
-     * Lookup table for links.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Link link_table = 9;</code>
-     */
-    private $link_table;
-    /**
-     * A common table for strings referenced by various messages.
-     * string_table[0] must always be "".
-     *
-     * Generated from protobuf field <code>repeated string string_table = 10;</code>
-     */
-    private $string_table;
-    /**
      * Time of collection (UTC) represented as nanoseconds past the epoch.
      *
-     * Generated from protobuf field <code>int64 time_nanos = 11;</code>
+     * Generated from protobuf field <code>int64 time_nanos = 4;</code>
      */
     protected $time_nanos = 0;
     /**
      * Duration of the profile, if a duration makes sense.
      *
-     * Generated from protobuf field <code>int64 duration_nanos = 12;</code>
+     * Generated from protobuf field <code>int64 duration_nanos = 5;</code>
      */
     protected $duration_nanos = 0;
     /**
      * The kind of events between sampled occurrences.
      * e.g [ "cpu","cycles" ] or [ "heap","bytes" ]
      *
-     * Generated from protobuf field <code>.opentelemetry.proto.profiles.v1development.ValueType period_type = 13;</code>
+     * Generated from protobuf field <code>.opentelemetry.proto.profiles.v1development.ValueType period_type = 6;</code>
      */
     protected $period_type = null;
     /**
      * The number of events between sampled occurrences.
      *
-     * Generated from protobuf field <code>int64 period = 14;</code>
+     * Generated from protobuf field <code>int64 period = 7;</code>
      */
     protected $period = 0;
     /**
@@ -123,22 +77,21 @@ class Profile extends \Google\Protobuf\Internal\Message
      * for human-friendly content. The profile must stay functional if this field
      * is cleaned.
      *
-     * Generated from protobuf field <code>repeated int32 comment_strindices = 15;</code>
+     * Generated from protobuf field <code>repeated int32 comment_strindices = 8;</code>
      */
     private $comment_strindices;
     /**
-     * Index into the string table of the type of the preferred sample
-     * value. If unset, clients should default to the last sample value.
+     * Index into the sample_type array to the default sample type.
      *
-     * Generated from protobuf field <code>int32 default_sample_type_strindex = 16;</code>
+     * Generated from protobuf field <code>int32 default_sample_type_index = 9;</code>
      */
-    protected $default_sample_type_strindex = 0;
+    protected $default_sample_type_index = 0;
     /**
      * A globally unique identifier for a profile. The ID is a 16-byte array. An ID with
      * all zeroes is considered invalid.
      * This field is required.
      *
-     * Generated from protobuf field <code>bytes profile_id = 17;</code>
+     * Generated from protobuf field <code>bytes profile_id = 10;</code>
      */
     protected $profile_id = '';
     /**
@@ -146,13 +99,13 @@ class Profile extends \Google\Protobuf\Internal\Message
      * can be discarded because their keys are too long or because there are too many
      * attributes. If this value is 0, then no attributes were dropped.
      *
-     * Generated from protobuf field <code>uint32 dropped_attributes_count = 19;</code>
+     * Generated from protobuf field <code>uint32 dropped_attributes_count = 11;</code>
      */
     protected $dropped_attributes_count = 0;
     /**
      * Specifies format of the original payload. Common values are defined in semantic conventions. [required if original_payload is present]
      *
-     * Generated from protobuf field <code>string original_payload_format = 20;</code>
+     * Generated from protobuf field <code>string original_payload_format = 12;</code>
      */
     protected $original_payload_format = '';
     /**
@@ -163,7 +116,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * The field is optional, however if it is present then equivalent converted data should be populated in other fields
      * of this message as far as is practicable.
      *
-     * Generated from protobuf field <code>bytes original_payload = 21;</code>
+     * Generated from protobuf field <code>bytes original_payload = 13;</code>
      */
     protected $original_payload = '';
     /**
@@ -179,7 +132,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * Attribute keys MUST be unique (it is not allowed to have more than one
      * attribute with the same key).
      *
-     * Generated from protobuf field <code>repeated int32 attribute_indices = 22;</code>
+     * Generated from protobuf field <code>repeated int32 attribute_indices = 14;</code>
      */
     private $attribute_indices;
 
@@ -200,26 +153,8 @@ class Profile extends \Google\Protobuf\Internal\Message
      *           sample_type.unit == "count".
      *     @type \Opentelemetry\Proto\Profiles\V1development\Sample[]|\Google\Protobuf\Internal\RepeatedField $sample
      *           The set of samples recorded in this profile.
-     *     @type \Opentelemetry\Proto\Profiles\V1development\Mapping[]|\Google\Protobuf\Internal\RepeatedField $mapping_table
-     *           Mapping from address ranges to the image/binary/library mapped
-     *           into that address range.  mapping[0] will be the main binary.
-     *           If multiple binaries contribute to the Profile and no main
-     *           binary can be identified, mapping[0] has no special meaning.
-     *     @type \Opentelemetry\Proto\Profiles\V1development\Location[]|\Google\Protobuf\Internal\RepeatedField $location_table
-     *           Locations referenced by samples via location_indices.
      *     @type int[]|\Google\Protobuf\Internal\RepeatedField $location_indices
-     *           Array of locations referenced by samples.
-     *     @type \Opentelemetry\Proto\Profiles\V1development\PBFunction[]|\Google\Protobuf\Internal\RepeatedField $function_table
-     *           Functions referenced by locations.
-     *     @type \Opentelemetry\Proto\Common\V1\KeyValue[]|\Google\Protobuf\Internal\RepeatedField $attribute_table
-     *           Lookup table for attributes.
-     *     @type \Opentelemetry\Proto\Profiles\V1development\AttributeUnit[]|\Google\Protobuf\Internal\RepeatedField $attribute_units
-     *           Represents a mapping between Attribute Keys and Units.
-     *     @type \Opentelemetry\Proto\Profiles\V1development\Link[]|\Google\Protobuf\Internal\RepeatedField $link_table
-     *           Lookup table for links.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $string_table
-     *           A common table for strings referenced by various messages.
-     *           string_table[0] must always be "".
+     *           References to locations in ProfilesDictionary.location_table.
      *     @type int|string $time_nanos
      *           Time of collection (UTC) represented as nanoseconds past the epoch.
      *     @type int|string $duration_nanos
@@ -235,9 +170,8 @@ class Profile extends \Google\Protobuf\Internal\Message
      *           should not be used to store any machine-readable information, it is only
      *           for human-friendly content. The profile must stay functional if this field
      *           is cleaned.
-     *     @type int $default_sample_type_strindex
-     *           Index into the string table of the type of the preferred sample
-     *           value. If unset, clients should default to the last sample value.
+     *     @type int $default_sample_type_index
+     *           Index into the sample_type array to the default sample type.
      *     @type string $profile_id
      *           A globally unique identifier for a profile. The ID is a 16-byte array. An ID with
      *           all zeroes is considered invalid.
@@ -341,67 +275,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Mapping from address ranges to the image/binary/library mapped
-     * into that address range.  mapping[0] will be the main binary.
-     * If multiple binaries contribute to the Profile and no main
-     * binary can be identified, mapping[0] has no special meaning.
+     * References to locations in ProfilesDictionary.location_table.
      *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Mapping mapping_table = 3;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getMappingTable()
-    {
-        return $this->mapping_table;
-    }
-
-    /**
-     * Mapping from address ranges to the image/binary/library mapped
-     * into that address range.  mapping[0] will be the main binary.
-     * If multiple binaries contribute to the Profile and no main
-     * binary can be identified, mapping[0] has no special meaning.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Mapping mapping_table = 3;</code>
-     * @param \Opentelemetry\Proto\Profiles\V1development\Mapping[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setMappingTable($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Opentelemetry\Proto\Profiles\V1development\Mapping::class);
-        $this->mapping_table = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Locations referenced by samples via location_indices.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Location location_table = 4;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getLocationTable()
-    {
-        return $this->location_table;
-    }
-
-    /**
-     * Locations referenced by samples via location_indices.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Location location_table = 4;</code>
-     * @param \Opentelemetry\Proto\Profiles\V1development\Location[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setLocationTable($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Opentelemetry\Proto\Profiles\V1development\Location::class);
-        $this->location_table = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Array of locations referenced by samples.
-     *
-     * Generated from protobuf field <code>repeated int32 location_indices = 5;</code>
+     * Generated from protobuf field <code>repeated int32 location_indices = 3;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getLocationIndices()
@@ -410,9 +286,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Array of locations referenced by samples.
+     * References to locations in ProfilesDictionary.location_table.
      *
-     * Generated from protobuf field <code>repeated int32 location_indices = 5;</code>
+     * Generated from protobuf field <code>repeated int32 location_indices = 3;</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -425,141 +301,9 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Functions referenced by locations.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Function function_table = 6;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getFunctionTable()
-    {
-        return $this->function_table;
-    }
-
-    /**
-     * Functions referenced by locations.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Function function_table = 6;</code>
-     * @param \Opentelemetry\Proto\Profiles\V1development\PBFunction[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setFunctionTable($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Opentelemetry\Proto\Profiles\V1development\PBFunction::class);
-        $this->function_table = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Lookup table for attributes.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.common.v1.KeyValue attribute_table = 7;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getAttributeTable()
-    {
-        return $this->attribute_table;
-    }
-
-    /**
-     * Lookup table for attributes.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.common.v1.KeyValue attribute_table = 7;</code>
-     * @param \Opentelemetry\Proto\Common\V1\KeyValue[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setAttributeTable($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Opentelemetry\Proto\Common\V1\KeyValue::class);
-        $this->attribute_table = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Represents a mapping between Attribute Keys and Units.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.AttributeUnit attribute_units = 8;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getAttributeUnits()
-    {
-        return $this->attribute_units;
-    }
-
-    /**
-     * Represents a mapping between Attribute Keys and Units.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.AttributeUnit attribute_units = 8;</code>
-     * @param \Opentelemetry\Proto\Profiles\V1development\AttributeUnit[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setAttributeUnits($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Opentelemetry\Proto\Profiles\V1development\AttributeUnit::class);
-        $this->attribute_units = $arr;
-
-        return $this;
-    }
-
-    /**
-     * Lookup table for links.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Link link_table = 9;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getLinkTable()
-    {
-        return $this->link_table;
-    }
-
-    /**
-     * Lookup table for links.
-     *
-     * Generated from protobuf field <code>repeated .opentelemetry.proto.profiles.v1development.Link link_table = 9;</code>
-     * @param \Opentelemetry\Proto\Profiles\V1development\Link[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setLinkTable($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Opentelemetry\Proto\Profiles\V1development\Link::class);
-        $this->link_table = $arr;
-
-        return $this;
-    }
-
-    /**
-     * A common table for strings referenced by various messages.
-     * string_table[0] must always be "".
-     *
-     * Generated from protobuf field <code>repeated string string_table = 10;</code>
-     * @return \Google\Protobuf\Internal\RepeatedField
-     */
-    public function getStringTable()
-    {
-        return $this->string_table;
-    }
-
-    /**
-     * A common table for strings referenced by various messages.
-     * string_table[0] must always be "".
-     *
-     * Generated from protobuf field <code>repeated string string_table = 10;</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
-     * @return $this
-     */
-    public function setStringTable($var)
-    {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::STRING);
-        $this->string_table = $arr;
-
-        return $this;
-    }
-
-    /**
      * Time of collection (UTC) represented as nanoseconds past the epoch.
      *
-     * Generated from protobuf field <code>int64 time_nanos = 11;</code>
+     * Generated from protobuf field <code>int64 time_nanos = 4;</code>
      * @return int|string
      */
     public function getTimeNanos()
@@ -570,7 +314,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * Time of collection (UTC) represented as nanoseconds past the epoch.
      *
-     * Generated from protobuf field <code>int64 time_nanos = 11;</code>
+     * Generated from protobuf field <code>int64 time_nanos = 4;</code>
      * @param int|string $var
      * @return $this
      */
@@ -585,7 +329,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * Duration of the profile, if a duration makes sense.
      *
-     * Generated from protobuf field <code>int64 duration_nanos = 12;</code>
+     * Generated from protobuf field <code>int64 duration_nanos = 5;</code>
      * @return int|string
      */
     public function getDurationNanos()
@@ -596,7 +340,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * Duration of the profile, if a duration makes sense.
      *
-     * Generated from protobuf field <code>int64 duration_nanos = 12;</code>
+     * Generated from protobuf field <code>int64 duration_nanos = 5;</code>
      * @param int|string $var
      * @return $this
      */
@@ -612,7 +356,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * The kind of events between sampled occurrences.
      * e.g [ "cpu","cycles" ] or [ "heap","bytes" ]
      *
-     * Generated from protobuf field <code>.opentelemetry.proto.profiles.v1development.ValueType period_type = 13;</code>
+     * Generated from protobuf field <code>.opentelemetry.proto.profiles.v1development.ValueType period_type = 6;</code>
      * @return \Opentelemetry\Proto\Profiles\V1development\ValueType|null
      */
     public function getPeriodType()
@@ -634,7 +378,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * The kind of events between sampled occurrences.
      * e.g [ "cpu","cycles" ] or [ "heap","bytes" ]
      *
-     * Generated from protobuf field <code>.opentelemetry.proto.profiles.v1development.ValueType period_type = 13;</code>
+     * Generated from protobuf field <code>.opentelemetry.proto.profiles.v1development.ValueType period_type = 6;</code>
      * @param \Opentelemetry\Proto\Profiles\V1development\ValueType $var
      * @return $this
      */
@@ -649,7 +393,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * The number of events between sampled occurrences.
      *
-     * Generated from protobuf field <code>int64 period = 14;</code>
+     * Generated from protobuf field <code>int64 period = 7;</code>
      * @return int|string
      */
     public function getPeriod()
@@ -660,7 +404,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * The number of events between sampled occurrences.
      *
-     * Generated from protobuf field <code>int64 period = 14;</code>
+     * Generated from protobuf field <code>int64 period = 7;</code>
      * @param int|string $var
      * @return $this
      */
@@ -679,7 +423,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * for human-friendly content. The profile must stay functional if this field
      * is cleaned.
      *
-     * Generated from protobuf field <code>repeated int32 comment_strindices = 15;</code>
+     * Generated from protobuf field <code>repeated int32 comment_strindices = 8;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getCommentStrindices()
@@ -694,7 +438,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * for human-friendly content. The profile must stay functional if this field
      * is cleaned.
      *
-     * Generated from protobuf field <code>repeated int32 comment_strindices = 15;</code>
+     * Generated from protobuf field <code>repeated int32 comment_strindices = 8;</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -707,29 +451,27 @@ class Profile extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Index into the string table of the type of the preferred sample
-     * value. If unset, clients should default to the last sample value.
+     * Index into the sample_type array to the default sample type.
      *
-     * Generated from protobuf field <code>int32 default_sample_type_strindex = 16;</code>
+     * Generated from protobuf field <code>int32 default_sample_type_index = 9;</code>
      * @return int
      */
-    public function getDefaultSampleTypeStrindex()
+    public function getDefaultSampleTypeIndex()
     {
-        return $this->default_sample_type_strindex;
+        return $this->default_sample_type_index;
     }
 
     /**
-     * Index into the string table of the type of the preferred sample
-     * value. If unset, clients should default to the last sample value.
+     * Index into the sample_type array to the default sample type.
      *
-     * Generated from protobuf field <code>int32 default_sample_type_strindex = 16;</code>
+     * Generated from protobuf field <code>int32 default_sample_type_index = 9;</code>
      * @param int $var
      * @return $this
      */
-    public function setDefaultSampleTypeStrindex($var)
+    public function setDefaultSampleTypeIndex($var)
     {
         GPBUtil::checkInt32($var);
-        $this->default_sample_type_strindex = $var;
+        $this->default_sample_type_index = $var;
 
         return $this;
     }
@@ -739,7 +481,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * all zeroes is considered invalid.
      * This field is required.
      *
-     * Generated from protobuf field <code>bytes profile_id = 17;</code>
+     * Generated from protobuf field <code>bytes profile_id = 10;</code>
      * @return string
      */
     public function getProfileId()
@@ -752,7 +494,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * all zeroes is considered invalid.
      * This field is required.
      *
-     * Generated from protobuf field <code>bytes profile_id = 17;</code>
+     * Generated from protobuf field <code>bytes profile_id = 10;</code>
      * @param string $var
      * @return $this
      */
@@ -769,7 +511,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * can be discarded because their keys are too long or because there are too many
      * attributes. If this value is 0, then no attributes were dropped.
      *
-     * Generated from protobuf field <code>uint32 dropped_attributes_count = 19;</code>
+     * Generated from protobuf field <code>uint32 dropped_attributes_count = 11;</code>
      * @return int
      */
     public function getDroppedAttributesCount()
@@ -782,7 +524,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * can be discarded because their keys are too long or because there are too many
      * attributes. If this value is 0, then no attributes were dropped.
      *
-     * Generated from protobuf field <code>uint32 dropped_attributes_count = 19;</code>
+     * Generated from protobuf field <code>uint32 dropped_attributes_count = 11;</code>
      * @param int $var
      * @return $this
      */
@@ -797,7 +539,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * Specifies format of the original payload. Common values are defined in semantic conventions. [required if original_payload is present]
      *
-     * Generated from protobuf field <code>string original_payload_format = 20;</code>
+     * Generated from protobuf field <code>string original_payload_format = 12;</code>
      * @return string
      */
     public function getOriginalPayloadFormat()
@@ -808,7 +550,7 @@ class Profile extends \Google\Protobuf\Internal\Message
     /**
      * Specifies format of the original payload. Common values are defined in semantic conventions. [required if original_payload is present]
      *
-     * Generated from protobuf field <code>string original_payload_format = 20;</code>
+     * Generated from protobuf field <code>string original_payload_format = 12;</code>
      * @param string $var
      * @return $this
      */
@@ -828,7 +570,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * The field is optional, however if it is present then equivalent converted data should be populated in other fields
      * of this message as far as is practicable.
      *
-     * Generated from protobuf field <code>bytes original_payload = 21;</code>
+     * Generated from protobuf field <code>bytes original_payload = 13;</code>
      * @return string
      */
     public function getOriginalPayload()
@@ -844,7 +586,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * The field is optional, however if it is present then equivalent converted data should be populated in other fields
      * of this message as far as is practicable.
      *
-     * Generated from protobuf field <code>bytes original_payload = 21;</code>
+     * Generated from protobuf field <code>bytes original_payload = 13;</code>
      * @param string $var
      * @return $this
      */
@@ -869,7 +611,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * Attribute keys MUST be unique (it is not allowed to have more than one
      * attribute with the same key).
      *
-     * Generated from protobuf field <code>repeated int32 attribute_indices = 22;</code>
+     * Generated from protobuf field <code>repeated int32 attribute_indices = 14;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getAttributeIndices()
@@ -890,7 +632,7 @@ class Profile extends \Google\Protobuf\Internal\Message
      * Attribute keys MUST be unique (it is not allowed to have more than one
      * attribute with the same key).
      *
-     * Generated from protobuf field <code>repeated int32 attribute_indices = 22;</code>
+     * Generated from protobuf field <code>repeated int32 attribute_indices = 14;</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */

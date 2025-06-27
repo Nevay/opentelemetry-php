@@ -43,13 +43,13 @@ class Sample extends \Google\Protobuf\Internal\Message
      */
     private $value;
     /**
-     * References to attributes in Profile.attribute_table. [optional]
+     * References to attributes in ProfilesDictionary.attribute_table. [optional]
      *
      * Generated from protobuf field <code>repeated int32 attribute_indices = 4;</code>
      */
     private $attribute_indices;
     /**
-     * Reference to link in Profile.link_table. [optional]
+     * Reference to link in ProfilesDictionary.link_table. [optional]
      *
      * Generated from protobuf field <code>optional int32 link_index = 5;</code>
      */
@@ -81,9 +81,9 @@ class Sample extends \Google\Protobuf\Internal\Message
      *           result has a list of values that is the element-wise sum of the
      *           lists of the originals.
      *     @type int[]|\Google\Protobuf\Internal\RepeatedField $attribute_indices
-     *           References to attributes in Profile.attribute_table. [optional]
+     *           References to attributes in ProfilesDictionary.attribute_table. [optional]
      *     @type int $link_index
-     *           Reference to link in Profile.link_table. [optional]
+     *           Reference to link in ProfilesDictionary.link_table. [optional]
      *     @type int[]|string[]|\Google\Protobuf\Internal\RepeatedField $timestamps_unix_nano
      *           Timestamps associated with Sample represented in nanoseconds. These timestamps are expected
      *           to fall within the Profile's time range. [optional]
@@ -185,7 +185,7 @@ class Sample extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * References to attributes in Profile.attribute_table. [optional]
+     * References to attributes in ProfilesDictionary.attribute_table. [optional]
      *
      * Generated from protobuf field <code>repeated int32 attribute_indices = 4;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -196,7 +196,7 @@ class Sample extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * References to attributes in Profile.attribute_table. [optional]
+     * References to attributes in ProfilesDictionary.attribute_table. [optional]
      *
      * Generated from protobuf field <code>repeated int32 attribute_indices = 4;</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
@@ -211,7 +211,7 @@ class Sample extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Reference to link in Profile.link_table. [optional]
+     * Reference to link in ProfilesDictionary.link_table. [optional]
      *
      * Generated from protobuf field <code>optional int32 link_index = 5;</code>
      * @return int
@@ -232,7 +232,7 @@ class Sample extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Reference to link in Profile.link_table. [optional]
+     * Reference to link in ProfilesDictionary.link_table. [optional]
      *
      * Generated from protobuf field <code>optional int32 link_index = 5;</code>
      * @param int $var
