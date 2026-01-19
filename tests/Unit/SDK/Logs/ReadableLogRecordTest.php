@@ -11,6 +11,7 @@ use OpenTelemetry\SDK\Common\Instrumentation\InstrumentationScopeInterface;
 use OpenTelemetry\SDK\Logs\LoggerSharedState;
 use OpenTelemetry\SDK\Logs\LogRecordLimits;
 use OpenTelemetry\SDK\Logs\ReadableLogRecord;
+use OpenTelemetry\SDK\Logs\ReadWriteLogRecord;
 use OpenTelemetry\SDK\Resource\ResourceInfo;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -75,5 +76,15 @@ class ReadableLogRecordTest extends TestCase
         $this->assertSame($complex, $record->getAttributes()->get('complex'));
         $this->assertSame($homogeneous, $record->getAttributes()->get('homogeneous'));
         $this->assertSame($heterogeneous, $record->getAttributes()->get('heterogeneous'));
+    }
+
+    public function test_read_write_record_attributes_can_be_modified(): void
+    {
+        $this->markTestSkipped();
+
+        $record = new ReadWriteLogRecord($this->scope, $this->sharedState, new LogRecord());
+        $record->setAttribute('attribute', 'value');
+
+        $this->assertSame('value', $record->getAttributes()->get('attribute'));
     }
 }
